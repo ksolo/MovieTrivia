@@ -2,9 +2,18 @@ class QuestionView {
 
   field String label;
 
-  constructor QuestionView new(String label) {
-    let label = label;
+  constructor QuestionView new(String labelContent) {
+    let label = labelContent;
     return this;
+  }
+
+  method int labelXCoordinate() {
+    var int lineLength, midPoint, centerOffset;
+    let lineLength = 64; // number of characters in a line
+    let midPoint = 64 / 2;
+
+    let centerOffset = label.length() / 2;
+    return (midPoint - centerOffset);
   }
 
   method void draw() {
@@ -13,6 +22,9 @@ class QuestionView {
     do Screen.drawLine(20, 20, 20, 120);
     do Screen.drawLine(492, 20, 492, 120);
     do Screen.drawLine(20, 120, 492, 120);
+
+    do Output.moveCursor(5, labelXCoordinate());
+    do Output.printString(label);
     return;
   }
 

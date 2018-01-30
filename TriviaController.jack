@@ -19,7 +19,6 @@ class TriviaController {
     let questionView = QuestionView.new("What???");
 
     do questionView.draw();
-
     return;
   }
 }
