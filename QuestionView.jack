@@ -1,0 +1,19 @@
+class QuestionView {
+
+  field String label;
+
+  constructor QuestionView new(String label) {
+    let label = label;
+    return this;
+  }
+
+  method void draw() {
+    do Screen.setColor(true);
+    do Screen.drawLine(20, 20, 492, 20);
+    do Screen.drawLine(20, 20, 20, 120);
+    do Screen.drawLine(492, 20, 492, 120);
+    do Screen.drawLine(20, 120, 492, 120);
+    return;
+  }
+
+}

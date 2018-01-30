@@ -1,0 +1,25 @@
+/** Core business logic for the game */
+class TriviaController {
+  field int score, currentRound, incorrectAnswerCount;
+
+  constructor TriviaController new() {
+    let score = 0;
+    let currentRound = 0;
+    let incorrectAnswerCount = 0;
+
+    return this;
+  }
+
+  method boolean continueGame() {
+    return incorrectAnswerCount < 3;
+  }
+
+  method void run() {
+    var QuestionView questionView;
+    let questionView = QuestionView.new("What???");
+
+    do questionView.draw();
+
+    return;
+  }
+}
