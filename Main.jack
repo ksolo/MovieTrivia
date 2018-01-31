@@ -3,6 +3,9 @@ class Main {
   /** initialize instance of the Trivia Controller and run */
   function void main() {
     var TriviaController controller;
+
+    do AnswerView.configureOffsets();
+
     let controller = TriviaController.new();
     do controller.run();
     return;

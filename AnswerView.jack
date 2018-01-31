@@ -1,0 +1,74 @@
+class AnswerView {
+  field int position;
+  field String label;
+
+  static Array offsets;
+
+  constructor AnswerView new(int positionIndex, String labelContent) {
+    let position = positionIndex;
+    let label = labelContent;
+
+    return this;
+  }
+
+  method void draw() {
+    var int leftX, topY, rightX, bottomY;
+    var Array coordinate;
+
+    let coordinate = offsets[position];
+    let leftX = coordinate[0];
+
+    do Output.printInt(leftX);
+
+    let topY = coordinate[1];
+    let rightX = leftX + 248;
+    let bottomY = topY + 30;
+
+    do Screen.drawLine(leftX, topY, rightX, topY);
+    do Screen.drawLine(leftX, topY, leftX, bottomY);
+    do Screen.drawLine(rightX, topY, rightX, bottomY);
+    do Screen.drawLine(leftX, bottomY, leftX, bottomY);
+    return;
+  }
+
+  method void dispose() {
+    do label.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+
+  function void configureOffsets() {
+    var int index;
+    var Array coordinate;
+
+    let offsets = Array.new(4);
+    let index = 0;
+
+    while(index < 4) {
+      let coordinate = Array.new(2);
+
+      if (index = 0) {
+        let coordinate[0] = 4;
+        let coordinate[1] = 165;
+      }
+
+      if (index = 1) {
+        let coordinate[0] = 260;
+        let coordinate[1] = 165;
+      }
+
+      if (index = 2) {
+        let coordinate[0] = 4;
+        let coordinate[1] = 195;
+      }
+
+      if (index = 3) {
+        let coordinate[0] = 260;
+        let coordinate[1] = 195;
+      }
+      let index = index + 1;
+      let offsets[index] = coordinate;
+    }
+    return;
+  }
+}
