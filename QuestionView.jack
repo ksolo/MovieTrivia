@@ -30,20 +30,27 @@ class QuestionView {
 
   method int labelXCoordinate() {
     var int lineLength, midPoint, centerOffset;
-    let lineLength = 64; // number of characters in a line
-    let midPoint = 64 / 2;
 
+    let lineLength = 64; // number of characters in a line
+    let midPoint = lineLength / 2;
     let centerOffset = label.length() / 2;
+
     return (midPoint - centerOffset);
   }
 
   method int labelYCoordinate() {
     var int rowsWithinBorder, verticalCenter, rowOffset;
-    let rowsWithinBorder = 11; // (147 - 2 * rowHeight) / rowHeight
+
+    let rowsWithinBorder = 11; // ((147 - 2 * rowHeight) / rowHeight) = 11
     let rowOffset = 1;
     let verticalCenter = rowsWithinBorder / 2;
 
     return rowOffset + verticalCenter;
   }
 
+  method void dispose() {
+    do label.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
 }
