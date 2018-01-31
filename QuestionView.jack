@@ -7,6 +7,27 @@ class QuestionView {
     return this;
   }
 
+  method void draw() {
+    do createBoarder();
+    do displayLabel();
+    return;
+  }
+
+  method void createBoarder() {
+    do Screen.setColor(true);
+    do Screen.drawLine(11, 11, 501, 11);
+    do Screen.drawLine(11, 11, 11, 147);
+    do Screen.drawLine(501, 11, 501, 147);
+    do Screen.drawLine(11, 147, 501, 147);
+    return;
+  }
+
+  method void displayLabel() {
+    do Output.moveCursor(labelYCoordinate(), labelXCoordinate());
+    do Output.printString(label);
+    return;
+  }
+
   method int labelXCoordinate() {
     var int lineLength, midPoint, centerOffset;
     let lineLength = 64; // number of characters in a line
@@ -16,16 +37,13 @@ class QuestionView {
     return (midPoint - centerOffset);
   }
 
-  method void draw() {
-    do Screen.setColor(true);
-    do Screen.drawLine(20, 20, 492, 20);
-    do Screen.drawLine(20, 20, 20, 120);
-    do Screen.drawLine(492, 20, 492, 120);
-    do Screen.drawLine(20, 120, 492, 120);
+  method int labelYCoordinate() {
+    var int rowsWithinBorder, verticalCenter, rowOffset;
+    let rowsWithinBorder = 11; // (147 - 2 * rowHeight) / rowHeight
+    let rowOffset = 1;
+    let verticalCenter = rowsWithinBorder / 2;
 
-    do Output.moveCursor(5, labelXCoordinate());
-    do Output.printString(label);
-    return;
+    return rowOffset + verticalCenter;
   }
 
 }
