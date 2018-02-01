@@ -1,33 +1,39 @@
 class AnswerView {
-  field int position;
+  field int leftX, topY, rightX, bottomY, position;
   field String label;
 
-  static Array offsets;
-
   constructor AnswerView new(int positionIndex, String labelContent) {
-    let position = positionIndex;
     let label = labelContent;
+    let position = positionIndex;
+    do setCoordinates();
 
     return this;
   }
 
   method void draw() {
-    var int leftX, topY, rightX, bottomY;
-    var Array coordinate;
+    do drawBoarder();
+    do printLabel();
+    return;
+  }
 
-    let coordinate = offsets[position];
-    let leftX = coordinate[0];
-
-    do Output.printInt(leftX);
-
-    let topY = coordinate[1];
-    let rightX = leftX + 248;
-    let bottomY = topY + 30;
-
+  method void drawBoarder() {
     do Screen.drawLine(leftX, topY, rightX, topY);
     do Screen.drawLine(leftX, topY, leftX, bottomY);
     do Screen.drawLine(rightX, topY, rightX, bottomY);
-    do Screen.drawLine(leftX, bottomY, leftX, bottomY);
+    do Screen.drawLine(leftX, bottomY, rightX, bottomY);
+    return;
+  }
+
+  method void printLabel() {
+    var int row, column;
+    let row = (topY / 11) + 1;
+    let column = (leftX / 8) + 2;
+
+    do Output.moveCursor(row, column);
+    do Output.printInt(position);
+    do Output.printString(". ");
+    do Output.printString(label);
+
     return;
   }
 
@@ -37,37 +43,25 @@ class AnswerView {
     return;
   }
 
-  function void configureOffsets() {
-    var int index;
-    var Array coordinate;
+  method void setCoordinates() {
+    if ((position = 0) | (position = 2)) {
+      let leftX = 11;
+      let rightX = 252;
+    }
 
-    let offsets = Array.new(4);
-    let index = 0;
+    if ((position = 1) | (position = 3)) {
+      let leftX = 260;
+      let rightX = 501;
+    }
 
-    while(index < 4) {
-      let coordinate = Array.new(2);
+    if ((position = 0) | (position = 1)) {
+      let topY = 165;
+      let bottomY = 195;
+    }
 
-      if (index = 0) {
-        let coordinate[0] = 4;
-        let coordinate[1] = 165;
-      }
-
-      if (index = 1) {
-        let coordinate[0] = 260;
-        let coordinate[1] = 165;
-      }
-
-      if (index = 2) {
-        let coordinate[0] = 4;
-        let coordinate[1] = 195;
-      }
-
-      if (index = 3) {
-        let coordinate[0] = 260;
-        let coordinate[1] = 195;
-      }
-      let index = index + 1;
-      let offsets[index] = coordinate;
+    if ((position = 2) | (position = 3)) {
+      let topY = 200;
+      let bottomY = 230;
     }
     return;
   }
