@@ -1,5 +1,4 @@
 class QuestionView {
-
   field String label;
 
   constructor QuestionView new(String labelContent) {
