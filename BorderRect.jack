@@ -1,0 +1,12 @@
+class BorderRect {
+
+  function void draw(int leftX, int topY, int rightX, int bottomY) {
+    do Screen.setColor(true);
+    do Screen.drawLine(leftX, topY, rightX, topY);
+    do Screen.drawLine(leftX, topY, leftX, bottomY);
+    do Screen.drawLine(rightX, topY, rightX, bottomY);
+    do Screen.drawLine(leftX, bottomY, rightX, bottomY);
+    return;
+  }
+
+}

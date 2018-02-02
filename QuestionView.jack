@@ -7,17 +7,13 @@ class QuestionView {
   }
 
   method void draw() {
-    do drawBoarder();
+    do drawBorder();
     do printLabel();
     return;
   }
 
-  method void drawBoarder() {
-    do Screen.setColor(true);
-    do Screen.drawLine(11, 11, 501, 11);
-    do Screen.drawLine(11, 11, 11, 147);
-    do Screen.drawLine(501, 11, 501, 147);
-    do Screen.drawLine(11, 147, 501, 147);
+  method void drawBorder() {
+    do BorderRect.draw(11, 11, 501, 147);
     return;
   }
 

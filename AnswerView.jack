@@ -11,16 +11,13 @@ class AnswerView {
   }
 
   method void draw() {
-    do drawBoarder();
+    do drawBorder();
     do printLabel();
     return;
   }
 
-  method void drawBoarder() {
-    do Screen.drawLine(leftX, topY, rightX, topY);
-    do Screen.drawLine(leftX, topY, leftX, bottomY);
-    do Screen.drawLine(rightX, topY, rightX, bottomY);
-    do Screen.drawLine(leftX, bottomY, rightX, bottomY);
+  method void drawBorder() {
+    do BorderRect.draw(leftX, topY, rightX, bottomY);
     return;
   }
 
