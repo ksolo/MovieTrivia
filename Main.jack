@@ -2,11 +2,13 @@
 class Main {
   /** initialize instance of the Trivia Controller and run */
   function void main() {
-    var TriviaController controller;
+    var QuestionsController questionsController;
+    var WelcomeController welcomeController;
 
-    let controller = TriviaController.new();
+    let questionsController = QuestionsController.new();
+    let welcomeController = WelcomeController.new(questionsController);
 
-    do controller.run();
+    do welcomeController.run();
     return;
   }
 }

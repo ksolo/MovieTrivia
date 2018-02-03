@@ -1,8 +1,8 @@
 /** Core business logic for the game */
-class TriviaController {
+class QuestionsController {
   field int score, currentRound, incorrectAnswerCount;
 
-  constructor TriviaController new() {
+  constructor QuestionsController new() {
     let score = 0;
     let currentRound = 0;
     let incorrectAnswerCount = 0;
@@ -18,6 +18,8 @@ class TriviaController {
     var QuestionView questionView;
     var AnswerView option1, option2, option3, option4;
 
+    do Screen.clearScreen();
+
     let questionView = QuestionView.new("What city was Batman Begins filmed?");
     let option1 = AnswerView.new(0, "New York");
     let option2 = AnswerView.new(1, "Seattle");
@@ -29,6 +31,11 @@ class TriviaController {
     do option2.draw();
     do option3.draw();
     do option4.draw();
+    return;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
     return;
   }
 }

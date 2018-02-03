@@ -1,0 +1,49 @@
+class WelcomeScreen {
+  field String line1, line2, line3, line4;
+
+  constructor WelcomeScreen new() {
+    let line1 = "Welcome to Movie Trivia!";
+    let line2 = "Can you get through all the questions";
+    let line3 = "before striking out?";
+    let line4 = "press C to continue";
+
+    return this;
+  }
+
+  method void draw() {
+    do drawBorder();
+    do printWelcomeMessage();
+    return;
+  }
+
+  method void drawBorder() {
+    do BorderRect.draw(11, 11, 501, 245);
+    return;
+  }
+
+  method void  printWelcomeMessage() {
+    do Output.moveCursor(9, cursorColumnToCenterLine(line1));
+    do Output.printString(line1);
+    do Output.moveCursor(10, cursorColumnToCenterLine(line2));
+    do Output.printString(line2);
+    do Output.moveCursor(11, cursorColumnToCenterLine(line3));
+    do Output.printString(line3);
+    do Output.moveCursor(14, cursorColumnToCenterLine(line4));
+    do Output.printString(line4);
+
+    return;
+  }
+
+  method int cursorColumnToCenterLine(String line) {
+    var int midPoint, offset;
+    let offset = (line.length() / 2);
+    let midPoint = 64 / 2;
+    return midPoint - offset;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
+}

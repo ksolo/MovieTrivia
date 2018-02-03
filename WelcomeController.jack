@@ -1,0 +1,50 @@
+class WelcomeController {
+
+  field QuestionsController nextController;
+
+  constructor WelcomeController new(QuestionsController questionsController) {
+    let nextController = questionsController;
+    return this;
+  }
+
+  method void transition() {
+    do nextController.run();
+    return;
+  }
+
+  method void run() {
+    var WelcomeScreen welcomeScreen;
+
+    do Screen.clearScreen();
+    let welcomeScreen = WelcomeScreen.new();
+    do welcomeScreen.draw();
+
+    do pollTocontinue();
+    do transition();
+    return;
+  }
+
+  method void pollTocontinue() {
+    var boolean wait;
+    var char key;
+
+    let wait = true;
+
+    while(wait) {
+      while(key = 0) {
+        let key = Keyboard.keyPressed();
+      }
+      if (key = 67) { let wait = false; }
+      else { let key = 0; }
+    }
+
+    return;
+  }
+
+  method void dispose() {
+    do nextController.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+
+}
