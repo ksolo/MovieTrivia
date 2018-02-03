@@ -34,12 +34,6 @@ class AnswerView {
     return;
   }
 
-  method void dispose() {
-    do label.dispose();
-    do Memory.deAlloc(this);
-    return;
-  }
-
   method void setCoordinates() {
     if ((position = 0) | (position = 2)) {
       let leftX = 11;
@@ -60,6 +54,12 @@ class AnswerView {
       let topY = 200;
       let bottomY = 230;
     }
+    return;
+  }
+
+  method void dispose() {
+    do label.dispose();
+    do Memory.deAlloc(this);
     return;
   }
 }

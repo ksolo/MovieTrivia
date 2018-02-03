@@ -1,0 +1,50 @@
+class QuestionBank {
+  field Array questions;
+  field int currentQuestionIndex;
+
+  constructor QuestionBank new() {
+    let currentQuestionIndex = 0;
+    let questions = Array.new(10);
+    do loadQuestions();
+    return this;
+  }
+
+  method boolean hasNextQuestion() {
+    if (currentQuestionIndex < 10) { return true; }
+    else { return false; }
+  }
+
+  method Question next() {
+    var Question question;
+
+    let question = questions[currentQuestionIndex];
+    let currentQuestionIndex = currentQuestionIndex + 1;
+    return question;
+  }
+
+  method void loadQuestions() {
+    var Question question;
+    var int counter;
+
+    // TODO: Replace with real questions
+    while(counter < 10) {
+      let question = Question.new("Who played x in y?");
+
+      do question.addOption("A");
+      do question.addOption("B");
+      do question.addOption("C");
+      do question.addOption("D");
+      do question.setCorrectAnswerIndex(2);
+
+      let questions[counter] = question;
+      let counter = counter + 1;
+    }
+    return;
+  }
+
+  method void dispose() {
+    do questions.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+}

@@ -1,0 +1,48 @@
+/** Model the Question with a collection of options */
+class Question {
+  field String text;
+  field Array options;
+  field int answerIndex, currentOptionIndex;
+
+  constructor Question new(String questionText) {
+    let text = questionText;
+    let options = Array.new(4);
+    let currentOptionIndex = 0;
+    return this;
+  }
+
+  method void addOption(String optionText) {
+    /* do not add anything once we have filled the array */
+    if (currentOptionIndex > 3) { return; }
+
+    let options[currentOptionIndex] = optionText;
+    let currentOptionIndex = currentOptionIndex + 1;
+    return;
+  }
+
+  method void setCorrectAnswerIndex(int index) {
+    let answerIndex = index;
+    return;
+  }
+
+  method int getAnswerIndex() {
+    return answerIndex;
+  }
+
+  method String getText() {
+    return text;
+  }
+
+  method String optionTextForIndex(int index) {
+    var String optionText;
+    let optionText = options[index];
+    return optionText;
+  }
+
+  method void dispose() {
+    do text.dispose();
+    do options.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+}
