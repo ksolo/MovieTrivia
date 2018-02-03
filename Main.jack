@@ -4,8 +4,10 @@ class Main {
   function void main() {
     var QuestionsController questionsController;
     var WelcomeController welcomeController;
+    var QuestionBank questionBank;
 
-    let questionsController = QuestionsController.new();
+    let questionBank = QuestionBank.new();
+    let questionsController = QuestionsController.new(questionBank);
     let welcomeController = WelcomeController.new(questionsController);
 
     do welcomeController.run();
