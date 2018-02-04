@@ -17,25 +17,16 @@ class QuestionsController {
 
   method void run() {
     var Question question;
-    var QuestionView questionView;
-    var AnswerView option1, option2, option3, option4;
+    var QuestionScreen questionScreen;
 
     do Screen.clearScreen();
 
     if (questionBank.hasNextQuestion()) {
       let question = questionBank.next();
+      let questionScreen = QuestionScreen.new(question);
 
-      let questionView = QuestionView.new(question.getText());
-      let option1 = AnswerView.new(0, question.optionTextForIndex(0));
-      let option2 = AnswerView.new(1, question.optionTextForIndex(1));
-      let option3 = AnswerView.new(2, question.optionTextForIndex(2));
-      let option4 = AnswerView.new(3, question.optionTextForIndex(3));
-
-      do questionView.draw();
-      do option1.draw();
-      do option2.draw();
-      do option3.draw();
-      do option4.draw();
+      do questionScreen.draw();
+      do questionScreen.dispose();
     }
     return;
   }

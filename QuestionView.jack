@@ -44,7 +44,6 @@ class QuestionView {
   }
 
   method void dispose() {
-    do label.dispose();
     do Memory.deAlloc(this);
     return;
   }
