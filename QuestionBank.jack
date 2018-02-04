@@ -26,19 +26,96 @@ class QuestionBank {
     var Question question;
     var int counter;
 
-    // TODO: Replace with real questions
-    while(counter < 10) {
-      let question = Question.new("Who played x in y?");
+    // Question 1
+    let question = Question.new("Who composed the music for Jurassic Park?");
+    do question.addOption("Hans Zimmer");
+    do question.addOption("Ramin Djawadi");
+    do question.addOption("John Williams");
+    do question.addOption("David Arnold");
+    do question.setCorrectAnswerIndex(2);
+    let questions[0] = question;
 
-      do question.addOption("A");
-      do question.addOption("B");
-      do question.addOption("C");
-      do question.addOption("D");
-      do question.setCorrectAnswerIndex(2);
+    // Question 2
+    let question = Question.new("In Miracle (2004), who played coach Herb Brooks?");
+    do question.addOption("Kurt Russel");
+    do question.addOption("Michael Douglas");
+    do question.addOption("Michael Keaton");
+    do question.addOption("Ted Danson");
+    do question.setCorrectAnswerIndex(0);
+    let questions[1] = question;
 
-      let questions[counter] = question;
-      let counter = counter + 1;
-    }
+    // Question 3
+    let question = Question.new("Who played Linguistics prof Louise Banks in Arrival (2016)?");
+    do question.addOption("Rachel McAdams");
+    do question.addOption("Anna Kendrick");
+    do question.addOption("Bryce Dallas Howard");
+    do question.addOption("Amy Adams");
+    do question.setCorrectAnswerIndex(3);
+    let questions[2] = question;
+
+    // Question 4
+    let question = Question.new("Which Bond film was the first to star Daniel Craig?");
+    do question.addOption("Skyfall");
+    do question.addOption("Casino Royale");
+    do question.addOption("Golden Eye");
+    do question.addOption("Goldfinger");
+    do question.setCorrectAnswerIndex(1);
+    let questions[3] = question;
+
+    // Question 5
+    let question = Question.new("Who directed the 2017 film, The Shape of Water?");
+    do question.addOption("Ron Howard");
+    do question.addOption("Clint Eastwood");
+    do question.addOption("Steven Spielberg");
+    do question.addOption("Guillermo del Toro");
+    do question.setCorrectAnswerIndex(3);
+    let questions[4] = question;
+
+    // Question 6
+    let question = Question.new("Who played Katherine G. Johnson in Hidden Figures (2016)?");
+    do question.addOption("Taraji P. Henson");
+    do question.addOption("Octavia Spencer");
+    do question.addOption("Janelle Moore");
+    do question.addOption("Lidya Jewett");
+    do question.setCorrectAnswerIndex(0);
+    let questions[5] = question;
+
+    // Question 7
+    let question = Question.new("In Apollo 13, who played astronaut Pete Conrad?");
+    do question.addOption("Tom Hanks");
+    do question.addOption("Bill Paxton");
+    do question.addOption("David Andrews");
+    do question.addOption("Kevin Bacon");
+    do question.setCorrectAnswerIndex(2);
+    let questions[6] = question;
+
+    // Question 8
+    let question = Question.new("Who directed Inception (2010)?");
+    do question.addOption("M Night Shyamalan");
+    do question.addOption("Zach Synder");
+    do question.addOption("JJ Abrams");
+    do question.addOption("Christopher Nolan");
+    do question.setCorrectAnswerIndex(3);
+    let questions[7] = question;
+
+    // Question 9
+    let question = Question.new("Who played Verbal Kint in The Usual Suspects (1995)?");
+    do question.addOption("Benicio Del Toro");
+    do question.addOption("Kevin Spacey");
+    do question.addOption("Stephen Baldwin");
+    do question.addOption("Gabriel Byrne");
+    do question.setCorrectAnswerIndex(1);
+    let questions[8] = question;
+
+    // Question 10
+    let question = Question.new("Which film is first in the Marvel Cinematic Universe?");
+    do question.addOption("Captain America");
+    do question.addOption("The Incredible Hulk");
+    do question.addOption("Thor");
+    do question.addOption("Iron Man");
+    do question.setCorrectAnswerIndex(3);
+    let questions[9] = question;
+
     return;
   }
 
