@@ -9,27 +9,13 @@ class Grader {
 
   method void getInput() {
     var boolean wait;
-
-    do Screen.clearScreen();
-    do Output.printString("The selectedOptionIndex is: ");
-    do Output.printInt(selectedOptionIndex());
-    do Sys.wait(1000);
+    let wait = true;
 
     while(wait) {
       while(selectedOption = 0) {
-        do Screen.clearScreen();
-        do Output.printChar(Keyboard.keyPressed());
-        do Sys.wait(1000);
-
         let selectedOption = Keyboard.keyPressed();
       }
-
-      do Screen.clearScreen();
-      do Output.printString("The selectedOptionIndex is: ");
-      do Output.printInt(selectedOptionIndex());
-      do Sys.wait(1000);
-
-      if (selectedOptionIndex() = -1) {
+      if (selectedOptionIndex() < 0) {
         let selectedOption = 0;
       } else {
         let wait = false;
@@ -43,22 +29,19 @@ class Grader {
   }
 
   method int selectedOptionIndex() {
-    var int optionIndex;
-    if (selectedOption = 48) {
-      let optionIndex = 0;
+    if (48 = selectedOption) {
+      return 0;
     }
     if (selectedOption = 49) {
-      let optionIndex = 1;
+      return 1;
     }
     if (selectedOption = 50) {
-      let optionIndex = 2;
+      return 2;
     }
     if (selectedOption = 51) {
-      let optionIndex = 3;
-    } else {
-      let optionIndex = -1; // user selected something other than 0-3
+      return 3;
     }
-    return optionIndex;
+    return -1;
   }
 
   method void dispose() {
