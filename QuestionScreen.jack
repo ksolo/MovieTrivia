@@ -1,3 +1,45 @@
 class QuestionScreen {
-  
+
+  field Question question;
+
+  constructor QuestionScreen new(Question currentQuestion) {
+    let question = currentQuestion;
+    return this;
+  }
+
+  method void draw() {
+    do drawQuestion();
+    do drawOptions();
+    do dispose();
+    return;
+  }
+
+  method void drawQuestion() {
+    var QuestionView questionView;
+    let questionView = QuestionView.new(question.getText());
+    do questionView.draw();
+    do questionView.dispose();
+    return;
+  }
+
+  method void drawOptions() {
+    var AnswerView answerView;
+    var int counter;
+
+    let counter = 0;
+    while (counter < 4) {
+      let answerView = AnswerView.new(counter, question.optionTextForIndex(counter));
+      do answerView.draw();
+      do answerView.dispose();
+      let counter = counter + 1;
+    }
+
+    return;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
 }

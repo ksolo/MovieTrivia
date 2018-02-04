@@ -1,41 +1,48 @@
 /** Core business logic for the game */
 class QuestionsController {
   field QuestionBank questionBank;
-  field int score, incorrectAnswerCount;
+  field int strikes;
 
   constructor QuestionsController new(QuestionBank questionBankParam) {
-    let score = 0;
-    let incorrectAnswerCount = 0;
+    let strikes = 0;
     let questionBank = questionBankParam;
-
     return this;
   }
 
   method boolean continueGame() {
-    return incorrectAnswerCount < 3;
+    return (strikes < 3) & (questionBank.hasNextQuestion());
   }
 
   method void run() {
     var Question question;
-    var QuestionView questionView;
-    var AnswerView option1, option2, option3, option4;
+    var QuestionScreen questionScreen;
+    var Grader grader;
+    var AnswerResultScreen result;
 
-    do Screen.clearScreen();
+    while(continueGame()) {
+      do Screen.clearScreen();
 
-    if (questionBank.hasNextQuestion()) {
       let question = questionBank.next();
+      let questionScreen = QuestionScreen.new(question);
 
-      let questionView = QuestionView.new(question.getText());
-      let option1 = AnswerView.new(0, question.optionTextForIndex(0));
-      let option2 = AnswerView.new(1, question.optionTextForIndex(1));
-      let option3 = AnswerView.new(2, question.optionTextForIndex(2));
-      let option4 = AnswerView.new(3, question.optionTextForIndex(3));
+      do questionScreen.draw();
+      do questionScreen.dispose();
+      do Sys.wait(1000);
 
-      do questionView.draw();
-      do option1.draw();
-      do option2.draw();
-      do option3.draw();
-      do option4.draw();
+      let grader = Grader.new(question);
+      do grader.getInput();
+      do Screen.clearScreen();
+
+      if (grader.answerIsCorrect()) {
+        let result = AnswerResultScreen.new("Correct!", strikes);
+      } else {
+        let strikes = strikes + 1;
+        let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
+      }
+
+      do result.draw();
+      do Sys.wait(1000);
+      do result.dispose();
     }
     return;
   }

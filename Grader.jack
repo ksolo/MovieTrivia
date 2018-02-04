@@ -1,0 +1,51 @@
+class Grader {
+  field Question question;
+  field char selectedOption;
+
+  constructor Grader new(Question currentQuestion) {
+    let question = currentQuestion;
+    return this;
+  }
+
+  method void getInput() {
+    var boolean wait;
+    let wait = true;
+
+    while(wait) {
+      while(selectedOption = 0) {
+        let selectedOption = Keyboard.keyPressed();
+      }
+      if (selectedOptionIndex() < 0) {
+        let selectedOption = 0;
+      } else {
+        let wait = false;
+      }
+    }
+    return;
+  }
+
+  method boolean answerIsCorrect() {
+    return (question.getAnswerIndex() = selectedOptionIndex());
+  }
+
+  method int selectedOptionIndex() {
+    if (48 = selectedOption) {
+      return 0;
+    }
+    if (selectedOption = 49) {
+      return 1;
+    }
+    if (selectedOption = 50) {
+      return 2;
+    }
+    if (selectedOption = 51) {
+      return 3;
+    }
+    return -1;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+}
