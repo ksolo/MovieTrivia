@@ -16,20 +16,21 @@ class QuestionsController {
   method void run() {
     var Question question;
     var QuestionScreen questionScreen;
-    var AnswerResultScreen result;
     var Grader grader;
+    var AnswerResultScreen result;
 
     while(continueGame()) {
       do Screen.clearScreen();
 
       let question = questionBank.next();
       let questionScreen = QuestionScreen.new(question);
+
       do questionScreen.draw();
       do questionScreen.dispose();
+      do Sys.wait(1000);
 
       let grader = Grader.new(question);
       do grader.getInput();
-
       do Screen.clearScreen();
 
       if (grader.answerIsCorrect()) {
@@ -40,24 +41,21 @@ class QuestionsController {
       }
 
       do result.draw();
+      do Sys.wait(1000);
       do result.dispose();
     }
-    return;
-  }
-
-  method void presentQuestion(Question question) {
-
+    do gameOver();
     return;
   }
 
   method void gameOver() {
-    var GameOverScreen gameOver;
-    let gameOver = GameOverScreen.new();
+    var GameOverScreen gameOverScreen;
+    let gameOverScreen = GameOverScreen.new();
 
     if (strikes < 3) {
-      do gameOver.drawWinningScreen();
+      do gameOverScreen.drawWinningScreen();
     } else {
-      do gameOver.drawLosingScreen();
+      do gameOverScreen.drawLosingScreen();
     }
     return;
   }
@@ -67,4 +65,5 @@ class QuestionsController {
     do Memory.deAlloc(this);
     return;
   }
+
 }
