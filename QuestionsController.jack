@@ -44,6 +44,19 @@ class QuestionsController {
       do Sys.wait(1000);
       do result.dispose();
     }
+    do gameOver();
+    return;
+  }
+
+  method void gameOver() {
+    var GameOverScreen gameOverScreen;
+    let gameOverScreen = GameOverScreen.new();
+
+    if (strikes < 3) {
+      do gameOverScreen.drawWinningScreen();
+    } else {
+      do gameOverScreen.drawLosingScreen();
+    }
     return;
   }
 
@@ -52,4 +65,5 @@ class QuestionsController {
     do Memory.deAlloc(this);
     return;
   }
+
 }
