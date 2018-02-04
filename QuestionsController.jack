@@ -15,36 +15,56 @@ class QuestionsController {
 
   method void run() {
     var Question question;
-    var QuestionScreen questionScreen;
-    var Grader grader;
     var AnswerResultScreen result;
+    var GameOverScreen gameOver;
 
     while(continueGame()) {
       do Screen.clearScreen();
 
       let question = questionBank.next();
-      let questionScreen = QuestionScreen.new(question);
+      do presentQuestion(question);
+      let result = gradeQuestion(question);
 
-      do questionScreen.draw();
-      do questionScreen.dispose();
-      do Sys.wait(1000);
-
-      let grader = Grader.new(question);
-      do grader.getInput();
-      do Screen.clearScreen();
-
-      if (grader.answerIsCorrect()) {
-        let result = AnswerResultScreen.new("Correct!", strikes);
-      } else {
-        let strikes = strikes + 1;
-        let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
+      if (strikes < 3) {
+        do result.draw();
       }
-
-      do result.draw();
-      do Sys.wait(1000);
       do result.dispose();
     }
+
+    let gameOver = GameOverScreen.new();
+
+    if (strikes < 3) {
+      do gameOver.drawWinningScreen();
+    } else {
+      do gameOver.drawLosingScreen();
+    }
     return;
+  }
+
+  method void presentQuestion(Question question) {
+    var QuestionScreen questionScreen;
+    let questionScreen = QuestionScreen.new(question);
+
+    do questionScreen.draw();
+    do questionScreen.dispose();
+    return;
+  }
+
+  method AnswerResultScreen gradeQuestion(Question question) {
+    var Grader grader;
+    var AnswerResultScreen result;
+
+    let grader = Grader.new(question);
+    do grader.getInput();
+    do Screen.clearScreen();
+
+    if (grader.answerIsCorrect()) {
+      return AnswerResultScreen.new("Correct!", strikes);
+    }
+
+    let strikes = strikes + 1;
+    let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
+    return result;
   }
 
   method void dispose() {

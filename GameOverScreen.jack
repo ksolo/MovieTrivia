@@ -1,0 +1,42 @@
+class GameOverScreen {
+  field String message;
+
+  constructor GameOverScreen new() {
+    let message = "";
+    return this;
+  }
+
+  method void drawWinningScreen() {
+    let message = "Congrats on finishing Movie Trivia!";
+    do draw();
+    return;
+  }
+
+  method void drawLosingScreen() {
+    let message = "Better luck next time";
+    do draw();
+    return;
+  }
+
+  method void draw() {
+    do Screen.clearScreen();
+    do BorderRect.draw(11, 11, 501, 245);
+    do diplayMessage();
+    return;
+  }
+
+  method void displayMessage() {
+    var int midPoint, offset;
+    let midPoint = 32;
+    let offset = message.lenght() / 2
+    do Output.moveCursor(10, midPoint - offset);
+    do Output.printString(message);
+    return
+  }
+
+  method void dispose() {
+    do message.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+}
