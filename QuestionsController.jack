@@ -1,32 +1,48 @@
 /** Core business logic for the game */
 class QuestionsController {
   field QuestionBank questionBank;
-  field int score, incorrectAnswerCount;
+  field int strikes;
 
   constructor QuestionsController new(QuestionBank questionBankParam) {
-    let score = 0;
-    let incorrectAnswerCount = 0;
+    let strikes = 0;
     let questionBank = questionBankParam;
-
     return this;
   }
 
   method boolean continueGame() {
-    return incorrectAnswerCount < 3;
+    return (strikes < 3) & (questionBank.hasNextQuestion());
   }
 
   method void run() {
     var Question question;
     var QuestionScreen questionScreen;
+    var Grader grader;
+    var AnswerResultScreen result;
 
-    do Screen.clearScreen();
+    while(continueGame()) {
+      do Screen.clearScreen();
 
-    if (questionBank.hasNextQuestion()) {
       let question = questionBank.next();
       let questionScreen = QuestionScreen.new(question);
 
       do questionScreen.draw();
       do questionScreen.dispose();
+      do Sys.wait(1000);
+
+      let grader = Grader.new(question);
+      do grader.getInput();
+      do Screen.clearScreen();
+
+      if (grader.answerIsCorrect()) {
+        let result = AnswerResultScreen.new("Correct!", strikes);
+      } else {
+        let strikes = strikes + 1;
+        let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
+      }
+
+      do result.draw();
+      do Sys.wait(1000);
+      do result.dispose();
     }
     return;
   }

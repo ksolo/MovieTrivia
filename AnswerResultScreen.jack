@@ -1,0 +1,53 @@
+class AnswerResultScreen {
+  field String phrase;
+  field int strikes;
+
+  constructor AnswerResultScreen new(String displayPhrase, int inStrikes) {
+    let phrase = displayPhrase;
+    let strikes = inStrikes;
+    return this;
+  }
+
+  method void draw() {
+    do Screen.clearScreen();
+    do BorderRect.draw(11, 11, 501, 245);
+    do displayText();
+    return;
+  }
+
+  method void displayText() {
+    do displayPhrase();
+    do displayRemainingStrikesMessage();
+    return;
+  }
+
+  method void displayPhrase() {
+    var int midPoint, offset;
+    let midPoint = 32;
+    let offset = phrase.length() / 2;
+    do Output.moveCursor(9, midPoint - offset);
+    do Output.printString(phrase);
+    return;
+  }
+
+  method void displayRemainingStrikesMessage() {
+    var String strikesRemaining;
+    var int midPoint, offset;
+
+    let strikesRemaining = " strikes remaining.";
+    let midPoint = 32;
+    let offset = (strikesRemaining.length() + 1) / 2;
+
+    do Output.moveCursor(10, midPoint - offset);
+    do Output.printInt(3 - strikes);
+    do Output.printString(strikesRemaining);
+
+    return;
+  }
+
+  method void dispose() {
+    do phrase.dispose();
+    do Memory.deAlloc(this);
+    return;
+  }
+}

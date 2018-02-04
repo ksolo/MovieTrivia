@@ -1,0 +1,68 @@
+class Grader {
+  field Question question;
+  field char selectedOption;
+
+  constructor Grader new(Question currentQuestion) {
+    let question = currentQuestion;
+    return this;
+  }
+
+  method void getInput() {
+    var boolean wait;
+
+    do Screen.clearScreen();
+    do Output.printString("The selectedOptionIndex is: ");
+    do Output.printInt(selectedOptionIndex());
+    do Sys.wait(1000);
+
+    while(wait) {
+      while(selectedOption = 0) {
+        do Screen.clearScreen();
+        do Output.printChar(Keyboard.keyPressed());
+        do Sys.wait(1000);
+
+        let selectedOption = Keyboard.keyPressed();
+      }
+
+      do Screen.clearScreen();
+      do Output.printString("The selectedOptionIndex is: ");
+      do Output.printInt(selectedOptionIndex());
+      do Sys.wait(1000);
+
+      if (selectedOptionIndex() = -1) {
+        let selectedOption = 0;
+      } else {
+        let wait = false;
+      }
+    }
+    return;
+  }
+
+  method boolean answerIsCorrect() {
+    return (question.getAnswerIndex() = selectedOptionIndex());
+  }
+
+  method int selectedOptionIndex() {
+    var int optionIndex;
+    if (selectedOption = 48) {
+      let optionIndex = 0;
+    }
+    if (selectedOption = 49) {
+      let optionIndex = 1;
+    }
+    if (selectedOption = 50) {
+      let optionIndex = 2;
+    }
+    if (selectedOption = 51) {
+      let optionIndex = 3;
+    } else {
+      let optionIndex = -1; // user selected something other than 0-3
+    }
+    return optionIndex;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+}
