@@ -21,17 +21,18 @@ class GameOverScreen {
   method void draw() {
     do Screen.clearScreen();
     do BorderRect.draw(11, 11, 501, 245);
-    do diplayMessage();
+    do displayMessage();
     return;
   }
 
   method void displayMessage() {
     var int midPoint, offset;
     let midPoint = 32;
-    let offset = message.lenght() / 2
-    do Output.moveCursor(10, midPoint - offset);
+    let offset = (message.length() / 2);
+
+    do Output.moveCursor(10, (midPoint - offset));
     do Output.printString(message);
-    return
+    return;
   }
 
   method void dispose() {
@@ -39,4 +40,5 @@ class GameOverScreen {
     do Memory.deAlloc(this);
     return;
   }
+
 }

@@ -15,22 +15,43 @@ class QuestionsController {
 
   method void run() {
     var Question question;
+    var QuestionScreen questionScreen;
     var AnswerResultScreen result;
-    var GameOverScreen gameOver;
+    var Grader grader;
 
     while(continueGame()) {
       do Screen.clearScreen();
 
       let question = questionBank.next();
-      do presentQuestion(question);
-      let result = gradeQuestion(question);
+      let questionScreen = QuestionScreen.new(question);
+      do questionScreen.draw();
+      do questionScreen.dispose();
 
-      if (strikes < 3) {
-        do result.draw();
+      let grader = Grader.new(question);
+      do grader.getInput();
+
+      do Screen.clearScreen();
+
+      if (grader.answerIsCorrect()) {
+        let result = AnswerResultScreen.new("Correct!", strikes);
+      } else {
+        let strikes = strikes + 1;
+        let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
       }
+
+      do result.draw();
       do result.dispose();
     }
+    return;
+  }
 
+  method void presentQuestion(Question question) {
+
+    return;
+  }
+
+  method void gameOver() {
+    var GameOverScreen gameOver;
     let gameOver = GameOverScreen.new();
 
     if (strikes < 3) {
@@ -39,32 +60,6 @@ class QuestionsController {
       do gameOver.drawLosingScreen();
     }
     return;
-  }
-
-  method void presentQuestion(Question question) {
-    var QuestionScreen questionScreen;
-    let questionScreen = QuestionScreen.new(question);
-
-    do questionScreen.draw();
-    do questionScreen.dispose();
-    return;
-  }
-
-  method AnswerResultScreen gradeQuestion(Question question) {
-    var Grader grader;
-    var AnswerResultScreen result;
-
-    let grader = Grader.new(question);
-    do grader.getInput();
-    do Screen.clearScreen();
-
-    if (grader.answerIsCorrect()) {
-      return AnswerResultScreen.new("Correct!", strikes);
-    }
-
-    let strikes = strikes + 1;
-    let result = AnswerResultScreen.new("Sorry that is not correct", strikes);
-    return result;
   }
 
   method void dispose() {
